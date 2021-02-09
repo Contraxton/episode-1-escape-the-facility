@@ -62,7 +62,7 @@ scene.onHitWall(SpriteKind.Player, function (sprite, location) {
     scene.cameraShake(2, 100)
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`tile14`, function (sprite, location) {
-    tiles.setTileAt(location, assets.tile`transparency16`)
+    tiles.setTileAt(location, sprites.dungeon.floorLight0)
     Oxygen_Levels.value += 20
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -128,16 +128,27 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     true
     )
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`tile18`, function (sprite, location) {
+    music.powerDown.play()
+    tiles.setWallAt(tiles.getTileLocation(12, 10), false)
+    tiles.setWallAt(tiles.getTileLocation(12, 11), false)
+    tiles.setWallAt(tiles.getTileLocation(15, 9), false)
+    tiles.setWallAt(tiles.getTileLocation(15, 11), false)
+    tiles.setTileAt(tiles.getTileLocation(12, 10), assets.tile`tile22`)
+    tiles.setTileAt(tiles.getTileLocation(12, 11), assets.tile`tile26`)
+    tiles.setTileAt(tiles.getTileLocation(15, 9), assets.tile`tile22`)
+    tiles.setTileAt(tiles.getTileLocation(15, 10), assets.tile`tile26`)
+})
 scene.onOverlapTile(SpriteKind.Player, assets.tile`tile16`, function (sprite, location) {
     music.powerDown.play()
     tiles.setWallAt(tiles.getTileLocation(2, 3), false)
     tiles.setWallAt(tiles.getTileLocation(3, 3), false)
     tiles.setWallAt(tiles.getTileLocation(7, 3), false)
     tiles.setWallAt(tiles.getTileLocation(8, 3), false)
-    tiles.setTileAt(tiles.getTileLocation(2, 3), assets.tile`transparency16`)
-    tiles.setTileAt(tiles.getTileLocation(3, 3), assets.tile`transparency16`)
-    tiles.setTileAt(tiles.getTileLocation(7, 3), assets.tile`transparency16`)
-    tiles.setTileAt(tiles.getTileLocation(8, 3), assets.tile`transparency16`)
+    tiles.setTileAt(tiles.getTileLocation(2, 3), assets.tile`tile20`)
+    tiles.setTileAt(tiles.getTileLocation(3, 3), assets.tile`tile24`)
+    tiles.setTileAt(tiles.getTileLocation(7, 3), assets.tile`tile20`)
+    tiles.setTileAt(tiles.getTileLocation(8, 3), assets.tile`tile24`)
 })
 statusbars.onZero(StatusBarKind.Health, function (status) {
     game.over(false, effects.splatter)
