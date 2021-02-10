@@ -65,10 +65,6 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`tile14`, function (sprite, lo
     tiles.setTileAt(location, sprites.dungeon.floorLight0)
     Oxygen_Levels.value += 20
 })
-controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    myMinimap = minimap.minimap()
-    minimap.includeSprite(myMinimap, Female_Character)
-})
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
     Female_Character,
@@ -226,7 +222,7 @@ controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
         . f f f b f 4 4 f b f f f . 
         . f f 4 1 f d d f 1 4 f f . 
         . . f f d d d d d d f f . . 
-        . . e f e 4 4 4 4 e f e . . 
+        . . e f e 4 4 4 4 e f e . 3 
         . e 4 f b 3 3 3 3 b f 4 e . 
         . 4 d f 3 3 3 3 3 3 c d 4 . 
         . 4 4 f 6 6 6 6 6 6 f 4 4 . 
@@ -275,7 +271,6 @@ scene.onOverlapTile(SpriteKind.Player, sprites.castle.tileGrass2, function (spri
     Oxygen_Levels.value += 100
 })
 let moving = false
-let myMinimap: minimap.Minimap = null
 let Oxygen_Levels: StatusBarSprite = null
 let Female_Character: Sprite = null
 scene.setBackgroundColor(13)
