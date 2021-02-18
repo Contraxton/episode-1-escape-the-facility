@@ -61,9 +61,31 @@ scene.onHitWall(SpriteKind.Player, function (sprite, location) {
     scene.cameraFollowSprite(Female_Character)
     scene.cameraShake(2, 100)
 })
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.stairNorth, function (sprite, location) {
+    game.over(true, effects.confetti)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`tile28`, function (sprite, location) {
+    music.powerDown.play()
+    tiles.setWallAt(tiles.getTileLocation(22, 14), false)
+    tiles.setWallAt(tiles.getTileLocation(22, 13), false)
+    tiles.setWallAt(tiles.getTileLocation(26, 13), false)
+    tiles.setWallAt(tiles.getTileLocation(26, 14), false)
+    tiles.setWallAt(tiles.getTileLocation(19, 15), false)
+    tiles.setWallAt(tiles.getTileLocation(20, 15), false)
+    tiles.setTileAt(tiles.getTileLocation(22, 13), assets.tile`tile22`)
+    tiles.setTileAt(tiles.getTileLocation(22, 14), assets.tile`tile26`)
+    tiles.setTileAt(tiles.getTileLocation(26, 13), assets.tile`tile22`)
+    tiles.setTileAt(tiles.getTileLocation(26, 14), assets.tile`tile26`)
+    tiles.setTileAt(tiles.getTileLocation(19, 15), assets.tile`tile20`)
+    tiles.setTileAt(tiles.getTileLocation(20, 15), assets.tile`tile24`)
+})
 scene.onOverlapTile(SpriteKind.Player, assets.tile`tile14`, function (sprite, location) {
     tiles.setTileAt(location, sprites.dungeon.floorLight0)
     Oxygen_Levels.value += 20
+})
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    myMinimap = minimap.minimap()
+    minimap.includeSprite(myMinimap, Female_Character)
 })
 controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
     animation.runImageAnimation(
@@ -129,7 +151,7 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`tile18`, function (sprite, lo
     tiles.setWallAt(tiles.getTileLocation(12, 10), false)
     tiles.setWallAt(tiles.getTileLocation(12, 11), false)
     tiles.setWallAt(tiles.getTileLocation(15, 9), false)
-    tiles.setWallAt(tiles.getTileLocation(15, 11), false)
+    tiles.setWallAt(tiles.getTileLocation(15, 10), false)
     tiles.setTileAt(tiles.getTileLocation(12, 10), assets.tile`tile22`)
     tiles.setTileAt(tiles.getTileLocation(12, 11), assets.tile`tile26`)
     tiles.setTileAt(tiles.getTileLocation(15, 9), assets.tile`tile22`)
@@ -271,8 +293,13 @@ scene.onOverlapTile(SpriteKind.Player, sprites.castle.tileGrass2, function (spri
     Oxygen_Levels.value += 100
 })
 let moving = false
+let myMinimap: minimap.Minimap = null
 let Oxygen_Levels: StatusBarSprite = null
 let Female_Character: Sprite = null
+game.splash("Escape the facility")
+game.splash("Your oxygen levels are low")
+game.splash("Find more o2 before you run out")
+game.splash("use computers to unlock doors")
 scene.setBackgroundColor(13)
 tiles.setTilemap(tilemap`level1`)
 Female_Character = sprites.create(img`
